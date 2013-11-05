@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+    <title>brainfuck interpreter</title>
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="tracer.css" type="text/css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+</head>
+<body>
+
+    <div class="navbar navbar-static-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="/">brainfuck interpreter</a>
+                <ul class="nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" ng-controller="brainfuckController">
+        <div class="btn-toolbar">
+            <div class="btn-group">
+                <a href="javascript:void(0);" class="btn" ng-hide="isRunning" ng-disabled="isFinished" ng-click="run();"><i class="icon-play"></i>
+                    <span ng-hide="isStarted">Run</span>
+                    <span ng-show="isStarted">Continue</span>
+                </a>
+                <a href="javascript:void(0);" class="btn" ng-show="isRunning" ng-click="pause();"><i class="icon-pause"></i>
+                    Pause
+                </a>
+                <a href="javascript:void(0);" class="btn" ng-disabled="isRunning || isFinished" ng-click="next();"><i class="icon-arrow-right"></i>
+                    Next</a>
+                <a href="javascript:void(0);" class="btn" ng-click="reset();"><i class="icon-refresh"></i>
+                    Reset</a>
+            </div>
+            <div class="pull-right">
+                <div class="btn-group">
+                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Speed: {{ops}} ops
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="javascript:void(0);" ng-click="ops = 5;">5 ops</a></li>
+                        <li><a href="javascript:void(0);" ng-click="ops = 10;">10 ops</a></li>
+                        <li><a href="javascript:void(0);" ng-click="ops = 20;">20 ops</a></li>
+                        <li><a href="javascript:void(0);" ng-click="ops = 50;">50 ops</a></li>
+                        <li><a href="javascript:void(0);" ng-click="ops = 100;">100 ops</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code -->
+        <div class="panel panel-default" id="code">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="pull-right text muted">currently executing <span class="label label-info">{{codePointer}}</span></div>
+                    <a class="brand" href="#code"><i class="icon-edit"></i>
+                        code</a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <textarea id="txtCode" ng-model="code" ng-disabled="isStarted"></textarea>
+            </div>
+        </div>
+
+        <!-- Memory -->
+        <div class="panel panel-default" id="memory-ref">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="pull-right text muted">currently pointing at <span class="label label-info">{{memoryPointer}}</span></div>
+                    <a class="brand" href="#memory-ref"><i class="icon-th"></i>
+                        memory</a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="memory" class="clearfix">
+                    <div class="memory-cell" current="{{$index == memoryPointer}}" ng-repeat="cell in memory">{{cell}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span6">
+                <!-- Input -->
+                <div class="panel panel-default" id="standard-input">
+                    <div class="navbar navbar-static-top">
+                        <div class="navbar-inner">
+                            <a class="brand" href="#standard-input"><i class="icon-arrow-down"></i>
+                                standard input</a>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div id="output">
+                            <span ng-repeat="char in standardOutput">{{char}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span6">
+                <!-- Output -->
+                <div class="panel panel-default" id="standard-output">
+                    <div class="navbar navbar-static-top">
+                        <div class="navbar-inner">
+                            <a class="brand" href="#standard-output"><i class="icon-share-alt"></i>
+                                standard output</a>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div id="input">
+                            <span ng-repeat="char in standardInput">{{char}}</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <hr />
+
+        <!-- About -->
+        <div class="panel panel-default" id="about">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <a class="brand" href="#code"><i class="icon-info-sign"></i>
+                        about</a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <p>Used in this project:</p>
+                <ul>
+                    <li><a href="http://angularjs.org/">AngularJs</a></li>
+                    <li><a href="http://getbootstrap.com/2.3.2/">Bootstrap</a></li>
+                    <li><a href="http://jquery.com/">jQuery</a></li>
+                </ul>
+                <p>The source code is available via <a href="https://github.com/mvalipour/ng-brainfuck">Github</a>. (or <code>CTRL + U</code> !)</p>
+                <p>Learn more about brainfuck on <a href="http://en.wikipedia.org/wiki/Brainfuck">Wikipedia</a></p>
+                <hr />
+                <p>Developed by <a href="https://github.com/mvalipour">Mohammad Valipour</a> -- Nov 2013.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="controller.js"></script>
+</body>
+</html>

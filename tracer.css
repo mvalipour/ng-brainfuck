@@ -1,0 +1,77 @@
+textarea, memory-cell {
+    font-family: Consolas, monospace;
+    margin: 0;
+    padding: 0;
+}
+
+.panel {
+    border:1px solid #ddd;
+    margin-top:10px;
+}
+.panel .panel-body {
+    padding:7px;
+}
+
+.panel .navbar .brand {
+    font-size: 18px;
+}
+.panel .navbar .brand,
+.panel .navbar .text {
+    padding:7px 14px 7px;
+}
+
+.panel .navbar .brand i {
+    vertical-align:baseline;
+}
+
+.panel .navbar-static-top .navbar-inner{
+    min-height:0;
+}
+
+.panel:target {
+    border-color:gold;
+    outline:solid 2px gold;
+}
+
+#memory .memory-cell {
+    float:left;
+    padding:7px;
+    width:20px;
+    text-align:center;
+    border:solid 1px #ccc;
+    margin-top:-1px;
+    margin-left:-1px;
+}
+
+#memory .memory-cell[current=true]{
+    background:#468847;
+    color:#fff;
+}
+
+#input, #output {
+    font-size: 30pt;
+    min-height: 50px;
+    padding-top:14px;
+}
+
+#txtCode {
+    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    padding: 0;
+    border: 0;
+    height: 150px;
+    max-height: 150px;
+    font-size: 30pt;
+    box-shadow:none;
+    padding-top:14px;
+}
+
+#txtCode[disabled] {
+    background: #fff;
+}
+
+#txtCode:focus {
+    box-shadow: none;
+    outline: none;
+}
