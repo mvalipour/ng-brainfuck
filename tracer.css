@@ -64,7 +64,7 @@ textarea, memory-cell {
     max-height: 150px;
     font-size: 30pt;
     box-shadow:none;
-    padding-top:14px;
+    line-height:90%;
 }
 
 #txtCode[disabled] {
