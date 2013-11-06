@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="myApp">
 <head>
     <title>brainfuck interpreter</title>
 
@@ -65,7 +65,8 @@
                 </div>
             </div>
             <div class="panel-body">
-                <textarea id="txtCode" ng-model="code" ng-disabled="isStarted"></textarea>
+                <textarea id="txtCode" ng-model="code" ng-disabled="isStarted"
+                    ng-selection-start="codePointer" ng-selection-end="codePointer + 1"></textarea>
             </div>
         </div>
 

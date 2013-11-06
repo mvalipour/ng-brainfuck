@@ -1,6 +1,28 @@
 // constants
 MEMORY_SIZE = 100;
 
+var app = angular.module('myApp', []);
+
+app.directive('ngSelectionStart', function () {
+    return {
+        link: function (scope, elm, attrs) {
+            scope.$watch(attrs.ngSelectionStart, function (value) {
+                elm[0].selectionStart = parseInt(value) || 0;
+            }); 
+        }
+    };
+});
+
+app.directive('ngSelectionEnd', function () {
+    return {
+        link: function (scope, elm, attrs) {
+            scope.$watch(attrs.ngSelectionEnd, function (value) {
+                elm[0].selectionEnd = parseInt(value) || 0;
+            });
+        }
+    };
+});
+
 function brainfuckController($scope, $timeout) {
     // setup memory
     $scope.ops = 10;
@@ -71,10 +93,6 @@ function brainfuckController($scope, $timeout) {
 
         this._runSymbol(this.code[this.codePointer]);
         this.codePointer++;
-
-        var codeEl = $("#txtCode").get(0);
-        codeEl.selectionStart = this.codePointer;
-        codeEl.selectionEnd = this.codePointer + 1;
 
         var me = this;
 
