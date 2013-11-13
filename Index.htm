@@ -59,13 +59,13 @@
         <div class="panel panel-default" id="code">
             <div class="navbar navbar-static-top">
                 <div class="navbar-inner">
-                    <div class="pull-right text muted">currently executing <span class="label label-info">{{codePointer}}</span></div>
+                    <div class="pull-right text muted" ng-show="isStarted">currently executing <span class="label label-info">{{codePointer}}</span></div>
                     <a class="brand" href="#code"><i class="icon-edit"></i>
                         code</a>
                 </div>
             </div>
             <div class="panel-body">
-                <textarea id="txtCode" ng-model="code" ng-disabled="isStarted"
+                <textarea id="txtCode" ng-model="code" ng-trim="false" ng-disabled="isStarted"
                     ng-selection-start="codePointer" ng-selection-end="codePointer + 1"></textarea>
             </div>
         </div>

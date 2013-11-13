@@ -62,9 +62,9 @@ textarea, memory-cell {
     border: 0;
     height: 150px;
     max-height: 150px;
-    font-size: 30pt;
+    font-size: 22pt;
     box-shadow:none;
-    line-height:90%;
+    line-height:130%;
 }
 
 #txtCode[disabled] {
