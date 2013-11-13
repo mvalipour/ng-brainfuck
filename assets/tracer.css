@@ -60,8 +60,7 @@ textarea, memory-cell {
     min-height: 100%;
     padding: 0;
     border: 0;
-    height: 150px;
-    max-height: 150px;
+    min-height: 150px;
     font-size: 22pt;
     box-shadow:none;
     line-height:130%;
